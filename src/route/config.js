@@ -1,6 +1,7 @@
 import Login from "../pages/login"
 import User from "../pages/user"
 import TabPage from "../pages/tab-page"
+import NotFind from "../pages/not-find"
 import { Navigate } from 'react-router-dom';
 
 function isNavigate(auth, element) {
@@ -20,18 +21,22 @@ const routerConfig = [
         element: isNavigate(false, <Login/>),
     },
     {
+        path: '/404',
+        element: isNavigate(false, <NotFind/>),
+    },
+    {
         path: '/user',
-        element: isNavigate(false, <User/>),
+        element: isNavigate(true, <User/>),
         children: [
             {
                 path: "tab",
-                element: isNavigate(false, <TabPage/>)
+                element: isNavigate(true, <TabPage/>)
             }
         ]
     },
     {
         path: '*',
-        element: <Navigate to="/" replace />,
+        element: <Navigate to="/404" replace />,
     },
 ]
 
